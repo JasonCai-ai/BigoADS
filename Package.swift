@@ -9,14 +9,14 @@ let package = Package(
     products: [
         .library(
             name: "BigoADS",
-            targets: ["BigoADSSDKResources"]
+            targets: ["BigoADSRes"]
         ),
     ],
     dependencies: [],
     targets: [
         // This is a wrapper target to configure various settings required by main binary target.
         .target(
-            name: "BigoADSSDKResources",
+            name: "BigoADSRes",
             dependencies: [
                 .target(name: "BigoADS")
             ],
@@ -38,16 +38,20 @@ let package = Package(
                 .linkedFramework("WebKit"),
                 
                 .linkedLibrary("z"),
+                .linkedLibrary("c++"),
+                .linkedLibrary("sqlite3"),
+                .linkedLibrary("xml2"),
+                .linkedLibrary("resolv"),
                 
                 // NOTE: Swift Package Manager currently does not allow dependencies with unsafeFlags, unless a specific branch/commit is used.
                 // For now, these flags should be added manually to the project for integration.
-                // .unsafeFlags(["-ObjC"])
+                 .unsafeFlags(["-ObjC"])
             ]
         ),
         .binaryTarget(
             name: "BigoADS",
-            url: "https://static-fed-oss.adsbigo.com/bigoads-framework/BigoADS_50000_60.zip",
-            checksum: "1d6052a171445531c0d35d497a81d6cbb7181f0a0a8e10d0e3f7a8b0c5ff4013"
+            url: "https://static-fed-oss.adsbigo.com/bigoads-framework/BigoADS_50000_61.zip",
+            checksum: "31051b442d6ae90624b45d7420cb2b2b5cdab1fca614aafc6c33be91358dea02"
         )
     ]
 )
